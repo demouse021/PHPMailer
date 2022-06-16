@@ -29,7 +29,6 @@ namespace PHPMailer\PHPMailer;
  * @author Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author Brent R. Matzelle (original founder)
  */
-class PHPMailer
 {
     const CHARSET_ASCII = 'us-ascii';
     const CHARSET_ISO88591 = 'iso-8859-1';
@@ -3238,31 +3237,6 @@ class PHPMailer
      *
      * @return string
      */
-    protected function attachAll($disposition_type, $boundary)
-    {
-        //Return text of body
-        $mime = [];
-        $cidUniq = [];
-        $incl = [];
-
-        //Add all attachments
-        foreach ($this->attachment as $attachment) {
-            //Check if it is a valid disposition_filter
-            if ($attachment[6] === $disposition_type) {
-                //Check for string attachment
-                $string = '';
-                $path = '';
-                $bString = $attachment[5];
-                if ($bString) {
-                    $string = $attachment[0];
-                } else {
-                    $path = $attachment[0];
-                }
-
-                $inclhash = hash('sha256', serialize($attachment));
-                if (in_array($inclhash, $incl, true)) {
-                    continue;
-                }
                 $incl[] = $inclhash;
                 $name = $attachment[2];
                 $encoding = $attachment[3];
